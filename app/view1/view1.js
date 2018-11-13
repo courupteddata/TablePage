@@ -12,6 +12,7 @@ angular.module('myApp.view1', ['ngRoute'])
 .controller('View1Ctrl', ["$scope","orderByFilter", function($scope, orderBy) {
 
     //Some constants for the table
+    //Edit would need to be changed in view1.html since it is hard coded there
     const EDIT = "Edit";
         const CANCEL = "Cancel";
         const SAVE = "Save";
@@ -43,7 +44,7 @@ angular.module('myApp.view1', ['ngRoute'])
     //The roles
     $scope.roles = ["Role 1", "Role 2", "Role 3"];
 
-        //Some information for the table rows
+    //Some information for the table rows
     $scope.tableHeaders = [
         {key: ID_KEY,        label: ID,        editable:false},
         {key: USERNAME_KEY,  label: USERNAME,  editable:false},
@@ -63,9 +64,11 @@ angular.module('myApp.view1', ['ngRoute'])
         {[ID_KEY]:"4", [USERNAME_KEY]:"username4",  [FULL_NAME_KEY]:"fullname4",  [ROLES_KEY]:$scope.roles[0], [FIELD1_KEY]:"fieldOne4",  [FIELD2_KEY]:"fieldTwo4",  [FIELD3_KEY]:"fieldThree4"},
     ];
 
+    //Used for the sorting of a column
     $scope.orderByKey = ID_KEY;
     $scope.reverseSort = false;
 
+    //Used to sort a column
     $scope.sort = function(key) {
          $scope.reverseSort = (key !== null && $scope.orderByKey === key) ? !$scope.reverseSort : false;
          $scope.orderByKey = key;
@@ -115,7 +118,7 @@ angular.module('myApp.view1', ['ngRoute'])
         const temp = {
             [EDIT] : true
         };
-
+        //Adds to front of array
         $scope.tableData.unshift(temp);
     };
 
