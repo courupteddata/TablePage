@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="text-center">
+        <h1>Table</h1>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th><button type="submit" ng-click="add()">Add</button></th>
+                <th ng-repeat="header in tableHeaders">
+                    <a ng-click="sort(header.key)">
+                        {{header.label}}
+                        <span  ng-show="orderByKey == header.key && !reverseSort;">▲</span><!-- Glyph icons not set up just using up and down character-->
+                        <span  ng-show="orderByKey == header.key && reverseSort;">▼</span>
+                    </a></th>
+                <th><!--Blank col --></th>
+            </tr>
+            </thead>
+            <tbody class="tbody-dark">
+            <tr ng-repeat="item in tableData">
+                <td>
+                    <button ng-hide="item.Edit" ng-click="edit($index)">Edit</button>
+                    <div ng-show="item.Edit">
+                        <button ng-click="save($index)">Save</button>
+                        <button ng-click="cancel($index)">Cancel</button>
+                    </div>
+                </td>
+                <td ng-repeat="header in tableHeaders">
+                    <div ng-hide="header.editable && item.Edit">{{item[header.key]}}</div>
+                    <div ng-show="header.editable && item.Edit">
+                        <div ng-show="header.options.length > 0">
+                            <select ng-model="item[header.key]" required>
+                                <option ng-repeat="option in header.options">{{option}}</option>
+                            </select>
+                        </div>
+                        <div ng-show="header.options.length == 0">
+                            <input type="text" ng-model="item[header.key]" required>
+                        </div>
+                    </div>
+                </td>
+                <td><!--Blank col --></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
